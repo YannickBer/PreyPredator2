@@ -26,8 +26,9 @@ namespace PreyPredator2
 
         public void AddAnimal(IAnimal animal)
         {
-            _allAnimals.Add(animal);
-            animal.DisplayOn(_canvas);
+            _allAnimals.Add(animal);    
+            animal.DisplayOn(_canvas); 
+
         }
 
         public void ProcessRound()
@@ -39,34 +40,33 @@ namespace PreyPredator2
             foreach (var animal in _allAnimals)
             {
 
-                _currentRoundNumber++; // verhogen van een ronde
-                animal.Move(); //dier bewegen
+                _currentRoundNumber++; 
+                animal.Move();
 
-                IAnimal baby = animal.TryBreed(); // variabele tussenstap voor TryBreed();
+                IAnimal baby = animal.TryBreed(); 
 
-                if(baby != null) //aparte lijst voor geboren dieren zoals gevraagd in PDF 
+                if(baby != null)
                 {
                     geboren.Add(baby);
                 }
 
-                if(animal is IPredator predator) //controleren of het dier een roofdier is ( LadyBug ) 
+                if(animal is IPredator predator) 
                 {
                     predator.Hunt(_allAnimals);
                 }
 
-                if (animal.IsDead) //aparte lijst voor gestorven dieren zoals gevraagd in PDF
+                if (animal.IsDead) 
                 {
                     gestorven.Add(animal);
                 }
             }
 
-            foreach(var animal in geboren)
+            foreach(var animal in geboren) //aparte lijst nieuwgeboren dieren
             {
-                _allAnimals.Add(animal);
-                animal.DisplayOn(_canvas);
+                AddAnimal(animal);
             }
 
-            foreach(var animal in gestorven)
+            foreach(var animal in gestorven) // aparte lijst gestorven dieren
             {
                 _allAnimals.Remove(animal);
             }

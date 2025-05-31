@@ -9,7 +9,7 @@ namespace PreyPredator2.Contracts
     public interface IAnimal : IDisplayable
     {
 
-        //In de PDF wordt niet gesproken over een read only dus get + set
+        //In de PDF wordt niet gesproken over een read only dus deze keer heb ik er een get + set van gemaakt.
         bool IsDead { get; set; }
 
         void Move();
