@@ -34,6 +34,8 @@ namespace PreyPredator2
             {
                 _insectWorld.AddAnimal(new LadyBug());
             }
+
+            DisplayStatistics();
         }
 
 

@@ -33,42 +33,44 @@ namespace PreyPredator2
 
         public void ProcessRound()
         {
-            IList<IAnimal> geboren = new List<IAnimal>();
-            IList<IAnimal> gestorven = new List<IAnimal>();
-
+            IList<IAnimal> born = new List<IAnimal>();
+            IList<IAnimal> died = new List<IAnimal>();
+            _currentRoundNumber++;
 
             foreach (var animal in _allAnimals)
             {
 
-                _currentRoundNumber++; 
+                
                 animal.Move();
 
                 IAnimal baby = animal.TryBreed(); 
 
                 if(baby != null)
                 {
-                    geboren.Add(baby);
+                    born.Add(baby);
                 }
 
                 if(animal is IPredator predator) 
                 {
                     predator.Hunt(_allAnimals);
+
                 }
 
                 if (animal.IsDead) 
                 {
-                    gestorven.Add(animal);
+                    died.Add(animal);
                 }
             }
 
-            foreach(var animal in geboren) //aparte lijst nieuwgeboren dieren
+            foreach(var animal in born) //aparte lijst nieuwgeboren dieren
             {
                 AddAnimal(animal);
             }
 
-            foreach(var animal in gestorven) // aparte lijst gestorven dieren
+            foreach(var animal in died) // aparte lijst gestorven dieren
             {
                 _allAnimals.Remove(animal);
+                animal.StopDisplaying();
             }
 
 

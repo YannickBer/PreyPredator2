@@ -63,6 +63,7 @@ namespace PreyPredator2
         {
             _canvas = canvas;
             canvas.Children.Add(_ellipse);
+            
         }
 
         public void Move()

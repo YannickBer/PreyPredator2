@@ -26,26 +26,23 @@ namespace PreyPredator2
 
         public void Hunt(IList<IAnimal> possibleVictims)
         {
-            foreach(var victim in possibleVictims)
+            _daysWithNoFood++;
+            foreach (var victim in possibleVictims)
             {
 
                 //De formule op de PDF
                 double distance = Math.Sqrt(Math.Pow(_position.X - victim.position.X,2) + Math.Pow(_position.Y - victim.position.Y,2));
 
-                if(distance <= 3)
+                if(CanEat(victim) && distance <= 3)
                 {
                     victim.StopDisplaying();
                     victim.IsDead = true;
                     _daysWithNoFood = 0;
-                    return;
+                    
                 }
 
                 
             }
-
-            
-            _daysWithNoFood++;
-
 
             //Als het 3 dagen niet gegeten heeft dan sterft het.
             if (_daysWithNoFood == 3)
